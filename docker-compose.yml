@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  ollama:
+    build:
+      context: .  # Current directory
+      dockerfile: Dockerfile
+    ports:
+      - "11434:11434"
+      - "8888:8888"
+    volumes:
+      - ./ollama/ollama:/root/.ollama   # Persist model data in a volume
+      - ./entrypoint.sh:/entrypoint.sh  # Mount custom entrypoint script
+    container_name: odnu-llama
+    tty: true
+    restart: always
